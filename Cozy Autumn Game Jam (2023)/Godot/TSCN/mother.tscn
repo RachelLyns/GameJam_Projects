@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://bye8yx2g2bqbf"]
+
+[ext_resource type="Script" path="res://Scripts/Mother.gd" id="1_qibdo"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8xp7h"]
+albedo_color = Color(1, 0.223529, 1, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_1ep7h"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_00134"]
+size = Vector3(1.48662, 1, 1.43013)
+
+[node name="Mother" type="Node3D"]
+script = ExtResource("1_qibdo")
+
+[node name="MotherBody" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_8xp7h")
+mesh = SubResource("CylinderMesh_1ep7h")
+
+[node name="MotherArea" type="Area3D" parent="."]
+collision_layer = 4
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MotherArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.572874)
+shape = SubResource("BoxShape3D_00134")
+
+[connection signal="area_entered" from="MotherArea" to="." method="_on_mother_area_area_entered"]

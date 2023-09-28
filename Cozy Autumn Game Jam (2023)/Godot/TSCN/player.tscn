@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://b4jdeb0o22k8s"]
+[gd_scene load_steps=10 format=3 uid="uid://b4jdeb0o22k8s"]
 
 [ext_resource type="Script" path="res://Scripts/PlayerControl.gd" id="1_oe0ps"]
 [ext_resource type="Script" path="res://Scripts/Camera3D.gd" id="2_08lgj"]
@@ -9,10 +9,16 @@ albedo_color = Color(0, 0.203922, 0.564706, 1)
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_spone"]
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_gw12d"]
+size = Vector3(0.660306, 1, 0.410463)
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wys2o"]
 albedo_color = Color(1, 0.329412, 0.0470588, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_83xx6"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_fe207"]
+size = Vector3(1.0965, 0.498893, 0.421163)
 
 [node name="Player" type="Node3D"]
 
@@ -25,8 +31,14 @@ material_override = SubResource("StandardMaterial3D_4f1u1")
 mesh = SubResource("CapsuleMesh_spone")
 skeleton = NodePath("../..")
 
+[node name="PlayerAreaPartner" type="Area3D" parent="PlayerControl"]
+collision_mask = 4
+
+[node name="PlayerCollision" type="CollisionShape3D" parent="PlayerControl/PlayerAreaPartner"]
+shape = SubResource("BoxShape3D_gw12d")
+
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(-1, -2.26267e-08, 8.44439e-08, 0, 0.965926, 0.258819, -8.74228e-08, 0.258819, -0.965926, 0, 0.72479, -2.4925)
+transform = Transform3D(1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 0.725, 3)
 script = ExtResource("2_08lgj")
 
 [node name="Raposo" type="Node3D" parent="."]
@@ -36,3 +48,13 @@ script = ExtResource("3_t14kg")
 transform = Transform3D(0.44, 0, 0, 0, 0.31, 0, 0, 0, 0.07, 0, -0.309007, -0.28981)
 material_override = SubResource("StandardMaterial3D_wys2o")
 mesh = SubResource("BoxMesh_83xx6")
+
+[node name="RaposoAreaMove" type="Area3D" parent="Raposo"]
+collision_layer = 2
+
+[node name="RaposoCollision" type="CollisionShape3D" parent="Raposo/RaposoAreaMove"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.142578, -0.279338)
+shape = SubResource("BoxShape3D_fe207")
+
+[connection signal="area_entered" from="Raposo/RaposoAreaMove" to="Raposo" method="_on_area_de_movimento_area_entered"]
+[connection signal="area_exited" from="Raposo/RaposoAreaMove" to="Raposo" method="_on_area_de_movimento_area_exited"]

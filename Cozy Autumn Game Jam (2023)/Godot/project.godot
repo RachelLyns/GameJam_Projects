@@ -18,11 +18,27 @@ config/icon="res://icon.svg"
 [autoload]
 
 Convergence="*res://Scripts/Convergence.gd"
+DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
+
+[dialogue_manager]
+
+general/states=["Convergence"]
 
 [display]
 
 window/size/viewport_width=1000
 window/size/viewport_height=800
+
+[editor]
+
+movie_writer/mix_rate=10000
+movie_writer/mjpeg_quality=0.5
+movie_writer/movie_file="/home/joasleon/GameJam_Projects/Cozy Autumn Game Jam (2023)/Godot/Video/Test.avi"
+movie_writer/disable_vsync=true
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/dialogue_manager/plugin.cfg")
 
 [input]
 
@@ -44,6 +60,16 @@ Action={
 , Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":32,"key_label":0,"unicode":32,"echo":false,"script":null)
 ]
 }
+
+[internationalization]
+
+locale/translations_pot_files=PackedStringArray("res://Dialog/Mother.dialogue")
+
+[layer_names]
+
+3d_physics/layer_1="Player"
+3d_physics/layer_2="Raposo"
+3d_physics/layer_3="Mother"
 
 [rendering]
 

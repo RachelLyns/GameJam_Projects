@@ -1,0 +1,12 @@
+~ start
+set Player_Move = false
+Mother: Oie Filha.
+Mother: Hoje vou precisar que voce va ver sua avo.
+- [E eu tenho alguma escolha?]
+	Mother: E outra coisa, vou precisar que voce pegue alguns ingredientes para sua avo
+	Mother: Sei que parece trabalhoso, mas sua avo ta querendo fazer uma torta, entao vai ser sua recompensa tambem.
+	Mother: Voce vai ter procurar uma Trufa.
+	Mother: Uma Maça.
+	Mother: E uma flor especial, a flor capuchinha, voce vao saber quando encontrar.
+	set Player_Move = true
+	=> END
