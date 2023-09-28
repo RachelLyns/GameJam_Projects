@@ -1,0 +1,38 @@
+[gd_scene load_steps=8 format=3 uid="uid://b4jdeb0o22k8s"]
+
+[ext_resource type="Script" path="res://Scripts/PlayerControl.gd" id="1_oe0ps"]
+[ext_resource type="Script" path="res://Scripts/Camera3D.gd" id="2_08lgj"]
+[ext_resource type="Script" path="res://Scripts/Raposo.gd" id="3_t14kg"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4f1u1"]
+albedo_color = Color(0, 0.203922, 0.564706, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_spone"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wys2o"]
+albedo_color = Color(1, 0.329412, 0.0470588, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_83xx6"]
+
+[node name="Player" type="Node3D"]
+
+[node name="PlayerControl" type="Node3D" parent="."]
+script = ExtResource("1_oe0ps")
+
+[node name="PlayerBody" type="MeshInstance3D" parent="PlayerControl"]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_4f1u1")
+mesh = SubResource("CapsuleMesh_spone")
+skeleton = NodePath("../..")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(-1, -2.26267e-08, 8.44439e-08, 0, 0.965926, 0.258819, -8.74228e-08, 0.258819, -0.965926, 0, 0.72479, -2.4925)
+script = ExtResource("2_08lgj")
+
+[node name="Raposo" type="Node3D" parent="."]
+script = ExtResource("3_t14kg")
+
+[node name="RaposoBody" type="MeshInstance3D" parent="Raposo"]
+transform = Transform3D(0.44, 0, 0, 0, 0.31, 0, 0, 0, 0.07, 0, -0.309007, -0.28981)
+material_override = SubResource("StandardMaterial3D_wys2o")
+mesh = SubResource("BoxMesh_83xx6")

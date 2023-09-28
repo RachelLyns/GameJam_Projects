@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://q4qaybc1s1r"]
+
+[ext_resource type="PackedScene" uid="uid://b4jdeb0o22k8s" path="res://TSCN/player.tscn" id="1_jtaki"]
+[ext_resource type="PackedScene" uid="uid://dfqc5b4inmh6c" path="res://TSCN/pig.tscn" id="2_mtrxe"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_5wwf3"]
+
+[node name="Main" type="Node3D"]
+
+[node name="Mundo" type="Node3D" parent="."]
+
+[node name="Chao" type="MeshInstance3D" parent="Mundo"]
+transform = Transform3D(12.245, 0, 0, 0, 0.115, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("BoxMesh_5wwf3")
+
+[node name="Player" parent="." instance=ExtResource("1_jtaki")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.43476, 0.518332, 0)
+
+[node name="Pig" parent="." instance=ExtResource("2_mtrxe")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.57396, 0.500643, 0)
