@@ -1,12 +1,32 @@
-[gd_scene load_steps=5 format=3 uid="uid://q4qaybc1s1r"]
+[gd_scene load_steps=8 format=3 uid="uid://q4qaybc1s1r"]
 
 [ext_resource type="PackedScene" uid="uid://b4jdeb0o22k8s" path="res://TSCN/player.tscn" id="1_jtaki"]
 [ext_resource type="PackedScene" uid="uid://dfqc5b4inmh6c" path="res://TSCN/pig.tscn" id="2_mtrxe"]
 [ext_resource type="PackedScene" uid="uid://bye8yx2g2bqbf" path="res://TSCN/mother.tscn" id="3_kk184"]
 
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_rl7ad"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_rma7s"]
+sky_material = SubResource("ProceduralSkyMaterial_rl7ad")
+
+[sub_resource type="Environment" id="Environment_47b4k"]
+background_mode = 2
+sky = SubResource("Sky_rma7s")
+tonemap_mode = 2
+glow_enabled = true
+
 [sub_resource type="BoxMesh" id="BoxMesh_5wwf3"]
 
 [node name="Main" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_47b4k")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+shadow_enabled = true
 
 [node name="Mundo" type="Node3D" parent="."]
 
@@ -15,7 +35,7 @@ transform = Transform3D(12.245, 0, 0, 0, 0.115, 0, 0, 0, 1, 0, 0, 0)
 mesh = SubResource("BoxMesh_5wwf3")
 
 [node name="Player" parent="." instance=ExtResource("1_jtaki")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.27321, 0.518332, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.475489, 0.518332, 0)
 
 [node name="Pig" parent="." instance=ExtResource("2_mtrxe")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.57396, 0.500643, -0.712133)

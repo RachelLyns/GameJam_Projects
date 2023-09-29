@@ -1,0 +1,148 @@
+~ start
+set Player_Move = false
+???: Eae Criança, tudo bem?
+???: Meu nome Hank, mas pode me chamar de Mr. Pig
+Mr. Pig: Quer jogar um jogo comigo?
+- Claro, pode ser.
+	Mr. Pig: Perfeito!
+	=> Pig_on_dice_starting
+- Na verdade eu estou ocupado agora, pode ser depois?
+	Mr. Pig: A serio? Que tristeza, eu lhe daria um premio se ganhasse.
+	- Premio? Me conte mais.
+		Mr. Pig: Ahh, ficou interessado? O premio é uma deliciosa Trufa, acabei de achar aqui perto das arvores.
+		=> Pig_on_dice_starting
+	- Eu realmente não vou poder.
+		Mr. Pig: Nem se o premio for uma deliciosa trufa? Acabei de encontrar nas arvores.
+		- Sendo assim acho que aceitarei seu desafio
+			=> Pig_on_dice_starting
+
+
+
+
+
+
+
+
+
+~ Pig_on_dice_starting
+Mr. Pig: O jogo se chama Pig on Dice, as regras do jogo são simples...
+Mr. Pig: Eu ou Você precisamos chegar á 100 pontos, um de nós dois começa rolando o dado.
+Mr. Pig: O numero que você pegar vai ficar sendo acumulado.
+Mr. Pig: Porémm!! Se você pegar 1 no dado seus pontos acumulados são zerados, mas relaxa, você sempre terá a opção de Rodar o dado de novo ou passar a vez.
+Mr. Pig: E se você passar a vez você consegue guardar os pontos para você, sendo sua pontuação total.
+Mr. Pig: Quem chgar á 100 pontos ganha hahaha.
+Mr. Pig: Quem pegar 1 no dado é um Pig, então pense bem se vai rolar um dado ou passar a vez.
+Mr. Pig: Se você ganhar de mim pelo menos uma vez eu lhe dou a trufa.
+Mr. Pig: Vamos começar?
+- Sim Claro
+	Mr. Pig: Ok, eu vou começar jogando.
+	=> Pig_on_dice_pig
+- Pode repetir de novo?
+	=> Pig_on_dice_starting
+
+
+
+~ Pig_on_dice_pig
+set Turn = "Pig"
+Mr. Pig: Vou jogar meu dado.
+do Dice_roll()
+Mr. Pig: Eu tirei [wait=1]{{Dice_num}} !
+
+if Dice_num == 1:
+	Mr. Pig: Oh não, deu Pig, sua vez agora.
+	=> Pig_on_dice_player
+elif Dice_num == 6:
+	Mr. Pig: Owoo que sorte!!
+else:
+	Mr. Pig: Urfa, consegui pontos.
+	
+do Pig_brain()
+if Pig_status == "Roll":
+	Mr. Pig: Eu vou querer rolar de novo.
+	=> Pig_on_dice_pig
+else:
+	do Turn_sum()
+	Mr. Pig: Eu vou querer passar minha vez.
+	if Pig_score >= 100:
+		=> EndGame
+	elif Player_score - Pig_score > 45:
+		=> EndGame
+	=> Pig_on_dice_player
+
+
+
+
+
+
+
+
+~ Pig_on_dice_player
+set Turn = "Player"
+Mr. Pig: Aqui, vou jogar seu dado.
+do Dice_roll()
+Mr. Pig: Seu dado deu [wait=1]{{Dice_num}} !
+if Dice_num == 1:
+	Mr. Pig: Oh não, deu Pig, minha vez agora.
+	=> Pig_on_dice_pig
+elif Dice_num == 6:
+	Mr. Pig: Owoo que sorte!!
+else:
+	Mr. Pig: Conseguiu bons pontos.
+	
+	
+Mr. Pig: Você quer continuar rolando ou quer passar a vez?
+- Rolar
+	set Player_status = "Roll"
+- Passar
+	set Player_status = "Pass"
+	
+if Player_status == "Roll":
+	Mr. Pig: hmm, então quer continuar.
+	=> Pig_on_dice_player
+else:
+	do Turn_sum()
+	if Player_score >= 100:
+		=> EndGame
+	elif Player_score - Pig_score > 45:
+		=> EndGame
+	Mr. Pig: Minha vez então.
+	=> Pig_on_dice_pig
+
+	
+
+
+
+
+
+
+
+~ EndGame
+if Player_score >= 100:
+	Mr. Pig: Wow, parece que você me ganhou no meu proprio Jogo.
+	Mr. Pig: Parabens!! Toma aqui a trufa que prometi.
+	set Status_game = "End"
+	set Player_Move = true
+	=> END
+elif Player_score - Pig_score > 45:
+	Mr. Pig: Wow, você é muito bom nesse jogo, você ta muito na minha frente entã oprefiro desistir.
+	Mr. Pig: Foi muito bom jogar com você, ainda tenho muito do que melhorar.
+	Mr. Pig: E parabens!! Toma aqui a trufa que prometi.
+	set Status_game = "End"
+	set Player_Move = true
+	=> END
+else:
+	Mr. Pig: Oh no, parece que alguem perdeu em, alcancei os 100!!
+	Mr. Pig: Vamos jogar de novo?
+	- Preciso dessa trufa de qualquer forma.
+		Mr. Pig: Enntão otimo, vamos jogar de novo então, eu começo de novo.
+		=> Pig_on_dice_pig
+
+
+
+
+~ repeat
+Mr. Pig: [[Oie criança|Opa amigo|Eae]], pronto para outra partida?
+=> END	
+
+
+

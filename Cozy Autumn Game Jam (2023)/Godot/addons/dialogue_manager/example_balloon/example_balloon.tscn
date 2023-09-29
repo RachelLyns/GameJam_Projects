@@ -22,7 +22,7 @@ layer = 100
 script = ExtResource("1_4u26j")
 
 [node name="Balloon" type="ColorRect" parent="."]
-color = Color(1, 1, 1, 0)
+color = Color(0, 0, 0, 1)
 
 [node name="Margin" type="MarginContainer" parent="Balloon"]
 layout_mode = 0
@@ -40,7 +40,6 @@ layout_mode = 2
 theme_override_constants/separation = 10
 
 [node name="CharacterLabel" type="RichTextLabel" parent="Balloon/Margin/VBox"]
-visible = false
 modulate = Color(1, 1, 1, 0.501961)
 layout_mode = 2
 mouse_filter = 1
@@ -50,7 +49,6 @@ fit_content = true
 scroll_active = false
 
 [node name="DialogueLabel" parent="Balloon/Margin/VBox" instance=ExtResource("2_a8ve6")]
-modulate = Color(0, 0, 0, 1)
 layout_mode = 2
 text = "Dialogue"
 

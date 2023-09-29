@@ -4,9 +4,15 @@ var Move_Speed = 1
 func _physics_process(delta):
 	
 	#Dialog
-	if(Convergence.Dialog != ""):
-		DialogueManager.show_example_dialogue_balloon(load(Convergence.Dialog), "start")
-		Convergence.Dialog = ""
+	if(Convergence.Dialog != ["", ""]):
+		DialogueManager.show_example_dialogue_balloon(load(Convergence.Dialog[0]), Convergence.Dialog[1])
+		Convergence.Dialog = ["", ""]
+		
+		
+		
+		
+		
+		
 		
 	Convergence.Player_Move_Speed = Move_Speed
 	

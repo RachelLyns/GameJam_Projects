@@ -1,12 +1,24 @@
 ~ start
 set Player_Move = false
 Mother: Oie Filha.
-Mother: Hoje vou precisar que voce va ver sua avo.
+Mother: Hoje vou precisar que você va ver sua avó.
 - [E eu tenho alguma escolha?]
-	Mother: E outra coisa, vou precisar que voce pegue alguns ingredientes para sua avo
-	Mother: Sei que parece trabalhoso, mas sua avo ta querendo fazer uma torta, entao vai ser sua recompensa tambem.
+	Mother: E outra coisa, vou precisar que você pegue alguns ingredientes para sua avó.
+	Mother: Sei que parece trabalhoso, mas sua avó ta querendo fazer uma torta, então vai ser sua recompensa tambem.
 	Mother: Voce vai ter procurar uma Trufa.
-	Mother: Uma Maça.
-	Mother: E uma flor especial, a flor capuchinha, voce vao saber quando encontrar.
+	Mother: Uma Maçâ.
+	Mother: E uma flor especial, a flor capuchinha, você vai saber quando encontrar.
 	set Player_Move = true
 	=> END
+	
+~ repeat1
+set Player_Move = false
+Mother: Não se esqueça dos ingredientes, e cuidado no caminho.
+set Player_Move = true
+=> END
+
+~ repeat2
+set Player_Move = false
+Mother: Criança você ainda ta aqui? Vá rapido que sua avó está esperando.
+set Player_Move = true
+=> END

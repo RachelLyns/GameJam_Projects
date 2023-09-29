@@ -10,14 +10,14 @@ func _ready():
 
 func _process(delta):
 	if(Move):
-		if(Convergence.Player_Position > position.x):
-			if((Convergence.Player_Position - Space_Limit) > position.x):
+		if(Convergence.Player_Position >= position.x):
+			if((Convergence.Player_Position - Space_Limit) >= position.x):
 				Move_Speed = Convergence.Player_Move_Speed
 			else:
 				Move_Speed = 0.8
 			position.x += delta * Move_Speed
-		elif(Convergence.Player_Position < position.x):
-			if((Convergence.Player_Position + Space_Limit) < position.x):
+		elif(Convergence.Player_Position <= position.x):
+			if((Convergence.Player_Position + Space_Limit) <= position.x):
 				Move_Speed = Convergence.Player_Move_Speed
 			else:
 				Move_Speed = 0.8

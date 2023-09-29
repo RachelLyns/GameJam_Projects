@@ -1,13 +1,34 @@
-[gd_scene load_steps=3 format=3 uid="uid://dfqc5b4inmh6c"]
+[gd_scene load_steps=6 format=3 uid="uid://dfqc5b4inmh6c"]
+
+[ext_resource type="Script" path="res://TSCN/pig.gd" id="1_l2qiv"]
+[ext_resource type="Script" path="res://TSCN/Score.gd" id="2_abtl8"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wtwvs"]
 albedo_color = Color(1, 0.698039, 0, 1)
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_pnj21"]
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_ict15"]
+size = Vector3(1.49916, 1, 1.70135)
+
 [node name="Pig" type="Node3D"]
+script = ExtResource("1_l2qiv")
 
 [node name="PigBody" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 material_override = SubResource("StandardMaterial3D_wtwvs")
 mesh = SubResource("CapsuleMesh_pnj21")
+
+[node name="PigArea" type="Area3D" parent="."]
+collision_layer = 8
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PigArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.287843, 0, 0.574901)
+shape = SubResource("BoxShape3D_ict15")
+
+[node name="TurnScore" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 23.0
+script = ExtResource("2_abtl8")
+
+[connection signal="area_entered" from="PigArea" to="." method="_on_pig_area_area_entered"]
